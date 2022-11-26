@@ -1,0 +1,29 @@
+[tool.poetry]
+name = "movies"
+version = "0.1.0"
+description = ""
+authors = ["Antonio Alonso <alloant@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.7"
+django = "3.2.16"
+imdbpy = "^2022.7.9"
+tmdbsimple = "^2.9.1"
+omdb = "^0.10.1"
+django-pwa = "^1.0.10"
+psycopg2-binary = "^2.9.5"
+dj-database-url = "^1.0.0"
+whitenoise = {extras = ["brotli"], version = "^6.2.0"}
+gunicorn = "^20.1.0"
+setuptools = "65.5.1"
+django-user-agents = "^0.4.0"
+pyyaml = "^6.0"
+ua-parser = "^0.16.1"
+user-agents = "^2.2.0"
+django-import-export = "^3.0.1"
+django-crispy-forms = "^1.14.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
