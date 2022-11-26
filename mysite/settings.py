@@ -89,6 +89,7 @@ DATABASES = {
     }
 }
 """
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -99,6 +100,17 @@ DATABASES = {
         'PORT': os.environ["PGPORT"],
     }
 }
+"""
+DATABASES = {
+    "default": {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'ioyvgkpd',
+        'USER': 'ioyvgkpd',
+        'PASSWORD': '5ZsgYCx0VRGayDum5tddEAE6JHWBMePb',
+        'HOST': 'tiny.db.elephantsql.com',
+        'PORT': '',
+    }
+ }
 
 
 
