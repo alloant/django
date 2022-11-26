@@ -13,6 +13,8 @@ from .scripts.imdbMovies import updateIMDbData, updateAllMoviesIMDb, getIMDbData
 
 from imdb import IMDb
 
+from el_pagination.decorators import page_template
+
 import tmdbsimple as tmdb
 tmdb.API_KEY = '3315b151d95796f817a164d4d79cdada'
 
@@ -354,7 +356,6 @@ def adminAddMovie(request):
 
     return render(request, 'admin/search.html', {'movies': movies,'q':q,'added':added,'sec':'desr'})
 
-from el_pagination.decorators import page_template
 
 @login_required
 @page_template('movies/listMovies_page.html')
