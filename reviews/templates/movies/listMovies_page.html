@@ -1,0 +1,25 @@
+{% load el_pagination_tags %}
+
+
+<script src='static/js/readmore.js'></script>
+
+
+{% paginate 10 reviews %}
+{% for r in reviews %}
+    {% if request.user_agent.is_mobile %}
+        {% include "movies/movieCardMobile.html" %}
+    {% else %}
+        {% include "movies/movieCardComputer.html" %}
+    {% endif %}
+{% endfor %}
+
+{% show_more %}           
+
+<script src='static/js/grt-youtube-popup.js'></script>
+<script>
+		$(".youtube-link").grtyoutube({
+				autoPlay:true,
+				theme: "dark"
+		});
+</script>
+

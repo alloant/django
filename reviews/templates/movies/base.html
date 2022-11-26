@@ -1,0 +1,47 @@
+{% load static %}
+{% load pwa %}
+{% load my_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+	    <title>Movies</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+        <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
+
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	    <link rel="stylesheet" href="{% static 'css/movies.css' %}">
+        <link rel="stylesheet" href="{% static 'css/grt-youtube-popup.css' %}">
+        
+        {% progressive_web_app_meta %}
+	</head>
+
+	<body>
+        
+        {% include "movies/navbar.html" %}
+
+        {% include "movies/filterModal.html" %}  	    
+        {% include "movies/searchModal.html" %}  	    
+        
+
+
+		<div class="container-fluid p-0" style="margin-top:80px">
+            {% block content %}{% endblock %}
+        </div>
+
+        {{ form.media }}
+        
+        {% block js %}
+            <script src="http://code.jquery.com/jquery-latest.js"></script>
+            <script src='/static/js/el-pagination.js'></script>
+        {% endblock %}
+    	</body>
+</html>

@@ -1,0 +1,167 @@
+@media screen and (max-width: 600px) {
+    h1 {
+	    color: #000000;
+        font-size: 28px;
+    }
+
+    h3 {
+        color: #000000;
+        font-size: 16px;
+    }
+
+}
+
+h1 {
+	color: #000000;
+    font-size: 36px;
+}
+
+h3 {
+    color: #000000;
+    font-size: 20px;
+}
+
+body {
+	margin: 10;
+	padding: 10;
+    max-width: 100%;
+    font-family: "Raleway";
+}
+
+div.video.card div.wrapper a.play_trailer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.certification {
+  display: inline-flex;
+  white-space: nowrap;
+  align-items: center;
+  align-content: center;
+  padding: 0.06em 4px 0.15em 4px !important;
+  border: 1px solid rgba(0,0,0,0.6);
+  color: rgba(0,0,0,0.6);
+  line-height: 1;
+  border-radius: 2px;
+  margin-right: 7px;
+}
+
+.page-header {
+    background-color: #000000;
+    margin-top: 0;
+    padding: 20px 20px 20px 40px;
+}
+
+.page-header h1, .page-header h1 a, .page-header h1 a:visited, .page-header h1 a:active {
+    color: #ffffff;
+    font-size: 36pt;
+    text-decoration: none;
+}
+
+.genres {
+	font-size: 90%;
+	color: #7A7A7A;
+	text-align: center;
+    line-height: 0.9;
+}
+
+.plot {
+	font-size: 120%;
+	color: #000000;
+	text-align: justify;
+}
+
+
+
+.actors {
+	font-size: 90%;
+}
+
+.show-read-more .more-text{
+    display: none;
+}
+
+.backdrop
+{
+    position: relative;
+    top: 0;
+    left: 0;
+}
+            
+.poster
+{
+    position: absolute;
+    top: 3vw;
+    left: 5px;
+}
+
+.playtrailer
+{
+    position: absolute;
+    bottom: 0vw; 
+    right: 5px;
+    font-size: 150%;
+}
+
+@mixin multiLineEllipsis($lineHeight: 1.2em, $lineCount: 1, $bgColor: white) {
+  overflow: hidden;
+  position: relative;
+  line-height: $lineHeight;
+  max-height: $lineHeight * $lineCount; 
+  text-align: justify;
+  margin-right: -1em;
+  padding-right: 1em;
+  &:before {
+    content: '...';
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
+  &:after {
+    content: '';
+    position: absolute;
+    right: 0;
+    width: 1em;
+    height: 1em;
+    margin-top: 0.2em;
+    background: $bgColor;
+  }
+}
+
+.block-with-text {
+  @include multiLineEllipsis($lineHeight: 1.2em, $lineCount: 3, $bgColor: white);  
+}
+
+.complete{
+    display:none;
+}
+
+.more{
+    color:navy;
+    font-size:13px;
+    padding:3px;
+    cursor:pointer;
+}
+
+
+.card {
+  height: auto;
+  width: auto;
+  background-color: #fff;
+  background: linear-gradient(#f8f8f8, #fff);
+  box-shadow: 0 8px 16px -8px rgba(0,0,0,0.4);
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
+  margin: 0rem;
+  
+}
+
+.card-img-top {
+    width: 100%;
+    object-fit: contain;
+}

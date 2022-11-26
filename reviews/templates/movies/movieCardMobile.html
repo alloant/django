@@ -1,0 +1,72 @@
+{% load my_tags %}
+
+{% if sec == 'sv' and r.sv == 1 or sec == 'sf' and r.sf == 1 %}
+<div class='card mb-4 mx-0 border-danger' style="border-style: solid;border-width: thick;">
+{% else %}
+<div class='card mb-4 mx-0'>
+{% endif %}
+    {% if r.movie.trailer != '' and r.sv == 2 and r.sf == 2 %}
+    <a class="youtube-link" href="#" youtubeid="{{ r.movie.trailer }}">
+    {% endif %}
+
+    <div style="position: relative; left: 0;top: 0;">
+    {% if r.movie.backdrop_path == '' %}
+        <img src="{% getPosterPath r.movie %}" loading="lazy" style="max-height:256px" class="backdrop card-img-top img-fluid">
+    {% else %}
+        <img src="https://image.tmdb.org/t/p/w780{{ r.movie.backdrop_path }}" loading="lazy" class="backdrop card-img-top img-fluid">
+        <img src="{% getPosterPath r.movie %}" loading="lazy" class="poster img-thumbnail h-50 align-middle">
+        {% if r.movie.trailer and r.sv == 2 and r.sf == 2 %}
+            <i class="fa fa-youtube-play playtrailer text-danger"></i>
+        {% endif %}
+    {% endif %}
+    </div>
+    
+
+
+
+    {% if r.movie.trailer != '' and r.sv == 2 and r.sf == 2 %}
+    </a>
+    {% endif %}
+   
+    {% include "movies/needsediting.html" %}
+
+    <h1 class='card-title p-0 bg-dark text-light text-center'>{{ r.movie.title }}</h1>
+
+    <div class='card-body p-0 text-center'>
+        {% include "movies/ratings.html" %}
+        <div class='container p-2'>
+            <p class='card-text genres'>
+                <span>{{ r.movie.year }}</span>
+                {% if r.movie.certification %}
+                <span> | </span>{% get_certification r.movie.certification %}
+                {% endif %}
+                {% if r.movie.runtime %}
+                <span> | </span><span>{{ r.movie.runtime }} min</span>
+                {% endif %}
+            </p>
+            <p class='card-text genres'>
+                {% if r.movie.genres %}
+                <span>{% genre_split r.movie.genres %}</span>
+                {% endif %}
+            </p>
+        </div>
+        
+        {% if r.notes %}
+        <p class='alert alert-primary' style='text-align:center'>{{ r.notes|linebreaksbr}}</p>
+        {% endif %}
+
+        {% if sec == 'desr' and r.text %}
+        <p class='alert alert-danger'>{{ r.text|linebreaksbr }}</p>
+        {% endif %}
+    
+        <p class='card-text show-read-more plot p-2'>{{ r.movie.overview|linebreaksbr }}</p>
+        <p class='actors p-2'>
+            Directors: {% people_split r.movie.director %}
+            | Stars: {% people_split r.movie.actors %}
+        </p>
+    </div>
+</div>
+
+
+
+

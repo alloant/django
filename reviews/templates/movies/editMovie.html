@@ -1,0 +1,90 @@
+{% extends 'movies/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <h2>Edit Movie</h2>
+    <form method="POST" class="movie-form">
+        {% csrf_token %}
+        <div class="form-row">
+            <div class="form-group col-md-2 mb-0">
+                {{ form.manual|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-2 mb-0">
+                {{ form.imdbID|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-2 mb-0">
+                {{ form.tmdbID|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-3 mb-0">
+                {{ form.tmdb_BASE_PATH|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-3 mb-0">
+                {{ form.kind|as_crispy_field }}
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-2 mb-0">
+                {{ form.year|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-8 mb-0">
+                {{ form.title|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-2 mb-0">
+                {{ form.runtime|as_crispy_field }}
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-3 mb-0">
+                {{ form.ratingIMDb|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-3 mb-0">
+                {{ form.ratingTMDb|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-3 mb-0">
+                {{ form.ratingRT|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-3 mb-0">
+                {{ form.ratingMetascore|as_crispy_field }}
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-2 mb-0">
+                {{ form.certification|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-10 mb-0">
+                {{ form.genres|as_crispy_field }}
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6 mb-0">
+                {{ form.director|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-6 mb-0">
+                {{ form.actors|as_crispy_field }}
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-12 mb-0">
+                {{ form.overview|as_crispy_field }}
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-4 mb-0">
+                {{ form.poster_path|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-4 mb-0">
+                {{ form.backdrop_path|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-4 mb-0">
+                {{ form.trailer|as_crispy_field }}
+            </div>
+        </div>
+        <button type="submit" class="btn btn-default">Save</button>
+    </form>
+{% endblock %}

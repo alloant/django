@@ -1,0 +1,70 @@
+{% load my_tags %}
+
+{% if sec == 'sv' and r.sv == 1 or sec == 'sf' and r.sf == 1 %}
+<div class='card mb-4 border-danger' style="border-style: solid;border-width: thick;">
+{% else %}
+<div class='card mb-4'>
+{% endif %}
+    {% include "movies/needsediting.html" %} 
+    <div class='row no-gutters'>
+        <div class='col-3'>
+            {% if r.movie.trailer != '' and r.sv == 2 and r.sf == 2 %}
+            <a class="youtube-link" href="#" youtubeid="{{ r.movie.trailer }}">
+            {% endif %}
+            
+            <div style="position: relative; left: 0;top: 0;">
+            {% if 'http' in r.movie.poster_path %}
+                <img class='card-img img-fluid mx-auto backdrop' loading="lazy" src='{{ r.movie.poster_path }}' alt='Card image'>
+            {% else %}
+                <img class='card-img img-fluid mx-auto backdrop' loading="lazy"  src='https://image.tmdb.org/t/p/w342{{ r.movie.poster_path }}' alt='Card image'>
+            {% endif %}
+            {% if r.movie.trailer != '' and r.sv == 2 and r.sf == 2 %}
+                <i class="fa fa-youtube-play playtrailer text-danger"></i>
+            {% endif %}
+            </div>
+             
+            {% if r.movie.trailer != '' and r.sv == 2 and r.sf == 2 %}
+             </a>
+            {% endif %}
+        </div>
+
+        <div class='col-9'>
+            <div class='card-body'>
+                <h1 class='card-title text-center'>{{ r.movie.title }}</h1>
+                <div class='container p-2'>
+                    <p class='card-text genres'>
+                        <span>{{ r.movie.year }}</span>
+                        {% if r.movie.certification %}
+                        <span> | </span>{% get_certification r.movie.certification %}
+                        {% endif %}
+                        {% if r.movie.runtime %}
+                        <span> | </span><span>{{ r.movie.runtime }} min</span>
+                        {% endif %}
+                        {% if r.movie.genres %}
+                            <span> | </span><span>{% genre_split r.movie.genres %}</span>
+                        {% endif %}
+                    </p>
+                </div>
+
+                {% if r.notes %}
+                <p class='alert alert-primary' style='text-align:center'>{{ r.notes|linebreaksbr}}</p>
+                {% endif %}
+
+                {% if sec == 'desr' and r.text %}
+                <p class='alert alert-danger'>{{ r.text|linebreaksbr }}</p>
+                {% endif %}
+    
+                <p class='card-text show-read-more plot p-2'>{{ r.movie.overview|linebreaksbr }}</p>
+
+                <p class='actors p-2'>
+                    Directors: {% people_split r.movie.director %}
+                    | Stars: {% people_split r.movie.actors %}
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class='card-footer p-0 text-center'>
+        {% include "movies/ratings.html" %}  
+    </div>
+</div>

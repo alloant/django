@@ -1,0 +1,37 @@
+{% extends 'admin/base.html' %}
+{% load my_tags %}
+
+
+
+{% block content %}
+	<form class="form-inline" action="/admin/addmovies">
+		<input class="form-control" type="text" placeholder="Search..." name="q">
+	</form>
+    
+    {% if added != None %}
+        <div class="alert alert-success">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>{{ added }} </strong> added.
+        </div>
+    {% endif %}
+
+	<div class="jumbotron">
+		<strong>Searching:</strong> {{ q }}
+	</div>
+
+
+	<ul class="list-group">
+		{% for movie in movies %}
+        <li href="#" class="list-group-item list-group-item-action">
+					<img class="img-thumbnail" src={{ movie.poster_path }}/>
+                    {{ movie.title }} ({{movie.year}}, {{movie.kind}})
+					<a class="btn btn-default" href="https://www.imdb.com/title/tt{{ movie.imdbID }}" target="_blank"><i class="icon-film"></i></a>
+					<a class="btn btn-default" href="?{% param_replace add=movie.imdbID %}" data-toggle="tooltip" title="Add as pending"><i class="icon-plus"></i></a>
+					<a class="btn btn-default" href="?{% param_replace approved=movie.imdbID %}" data-toggle="tooltip" title="Add as approved"><i class="icon-check"></i></a>
+				</li>
+    {% endfor %}
+    </ul>
+
+
+
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'movies/base.html' %}
+
+{% block content %}
+    <div class="container px-1">
+    {% if movieType == 'patata' %}
+        <div class='page-header p-0'>
+            <h1 class='text-center'>{{ movieType }}</h1>
+        </div>
+    {% endif %}
+
+    {% if updated != None %}
+        <div class="alert alert-success">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>{{ updated }} </strong> updated.
+        </div>
+    {% endif %}
+ 
+    {% include 'movies/listMovies_page.html' %}
+    </div>
+
+{% endblock %}
+
+
+{% block js %}
+    {{ block.super }}
+    <script>
+        $.endlessPaginate({paginateOnScroll: true});
+    </script>
+{% endblock %}
+
+

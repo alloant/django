@@ -1,0 +1,21 @@
+<form action="" method="post">
+    {% csrf_token %}
+    <div id="queryModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+        <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="form-row">
+                        <div class="form-group">
+                            {{ query.query }}
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" value="Submit">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

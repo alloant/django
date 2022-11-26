@@ -1,0 +1,67 @@
+{% extends 'movies/base.html' %}
+{% load my_tags %}
+
+{% block content %}
+
+    <form class="form-inline" action="/movies/newmovie">
+		<input class="form-control" type="text" placeholder="Search..." name="q">
+	</form>
+    
+    {% if added != None %}
+        <div class="alert alert-success">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>{{ added }} </strong> added.
+        </div>
+    {% endif %}
+
+	<div class="jumbotron">
+		<strong>Searching:</strong> {{ q }}
+	</div>
+
+
+<div class="container-fluid p-0">
+    {% for movie in movies %}
+    
+    <div class='card'>
+        <div style="position: relative; left: 0;top: 0;">
+            {% if movie.backdrop_path == '' %}
+                <img src="{% getPosterPath movie %}" loading="lazy" style="max-height:256px" class="backdrop card-img-top img-fluid">
+            {% else %}
+                <img src="https://image.tmdb.org/t/p/w780{{ movie.backdrop_path }}" loading="lazy" class="backdrop card-img-top img-fluid">
+                <img src="{% getPosterPath movie %}" loading="lazy" class="poster img-thumbnail h-50 align-middle">
+                {% if movie.trailer and sv == 2 and sf == 2 %}
+                    <i class="fa fa-youtube-play playtrailer text-danger"></i>
+                {% endif %}
+            {% endif %}
+        </div>
+        
+        <div class='card-body p-2'>
+            <h1 class='card-title text-center'>{{ movie.title }}</h1>
+            <div class='container'>
+                <p class='card-text genres'>
+                    <span>{{ movie.year }} {{ movie.BASE_PATH }}</span>
+                </p>
+            </div>
+            <p>{{ movie.overview }}</p>
+            <p>
+                <a class="btn btn-default" href='https://www.themoviedb.org/{{ movie.BASE_PATH }}/{{ movie.tmdbID }}' target="_blank">
+                    <i class="fa fa-film"></i>
+                </a>
+
+				<a class="btn btn-default" href="?{% param_replace addBP=movie.BASE_PATH add=movie.tmdbID %}" data-toggle="tooltip" title="Add as pending">
+                    <i class="fa fa-plus"></i>
+                </a>
+					
+                <a class="btn btn-default" href="?{% param_replace addBP=movie.BASE_PATH approved=movie.tmdbID %}" data-toggle="tooltip" title="Add as approved">
+                    <i class="fa fa-check"></i>
+                </a>
+            </p>
+            
+        </div>
+
+    </div>
+
+{% endfor %}
+</div>
+
+{% endblock %}

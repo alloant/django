@@ -3,3 +3,13 @@ Django==4.0.4
 gunicorn==20.1.0
 psycopg2==2.8.6
 sqlparse==0.4.2
+imdbpy==2022.7.9
+tmdbsimple==2.9.1
+omdb==0.10.1
+django-pwa==1.0.10
+psycopg2-binary==2.9.5
+django-user-agents==0.4.0
+pyyaml==6.0
+ua-parser==0.16.1
+user-agents==2.2.0
+django-import-export==3.0.1
