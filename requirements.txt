@@ -1,7 +1,7 @@
 asgiref==3.5.2
 Django==3.2.16
 gunicorn==20.1.0
-psycopg2-binary==2.8.6
+psycopg2==2.8.6
 sqlparse==0.4.2
 imdbpy==2022.7.9
 tmdbsimple==2.9.1
