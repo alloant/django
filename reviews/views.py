@@ -152,11 +152,15 @@ def getFilterReviews(sec='',r='',rGET = {}):
 
     ## Filter for k
     if 'k' in rGET:
-        if rGET['k'] == 'miniserie':
-            reviews = reviews.filter(Q(movie__tv_type='Miniseries'))
-        elif rGET['k'] in ['serie','tv','movie']:
-            if rGET['k'] == 'serie': rGET['k'] = 'tv'
-            reviews = reviews.filter(Q(movie__kind__icontains=rGET['k']))
+        if not ('serie' in rGET['k'] and 'movie' in rGET['k']):
+            kinds = ''
+            if 'serie' in rGET['k']:
+                kinds = 'tv'
+            elif 'movie' in rGET['k']:
+                kinds = 'movie'
+
+            if kinds:
+                reviews = reviews.filter(Q(movie__kind__icontains=kinds))
 
     ## Filter for g
     if 'g' in rGET:
