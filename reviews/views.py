@@ -135,7 +135,6 @@ def getFilterReviews(sec='',r='',rGET = {}):
             reviews = reviews.filter(Q(movie__ratingMetascore=0))
 
             #reviews = reviews.filter(Q(movie__kind='movie')).order_by('movie__updated')
-            print(len(reviews))
             #for r in reviews:
                 #updateOMDbRatings(r.movie)
                 #r.movie.updated = timezone.now().date()
@@ -179,7 +178,7 @@ def getFilterReviews(sec='',r='',rGET = {}):
     ## Filter for q
     if 'q' in rGET:
         reviews = reviews.filter(Q(movie__title__iregex=r'%s' % (rGET['q'])))
-
+    print(order)
     return reviews.order_by(order[0],order[1],order[2])
 
 
