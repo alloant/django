@@ -194,8 +194,8 @@ def updateRT(movie):
             for x in rows:
                 info={"audiencescore":x.get('audiencescore'),"tomatometerscore":x.get('tomatometerscore')}
             
-            movie.ratingRT = info['tomatometerscore']
-            movie.audienceRT = info['audiencescore']
+            movie.ratingRT = info['tomatometerscore'] if info['tomatometerscore'] != "" else -1
+            movie.audienceRT = info['audiencescore'] if info['audiencescore'] != "" else -1
         except Exception as e:
             print(e)
 
