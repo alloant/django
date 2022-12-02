@@ -9,7 +9,7 @@ from django.db.models import Q, F
 from datetime import datetime, timedelta
 
 from .forms import MovieForm, ReviewForm, MovieFilter, SearchForm
-from .scripts.imdbMovies import updateIMDbData, updateAllMoviesIMDb, getIMDbData, importReviews, updateRatings, updateMovieTMDb, updateOMDbRatings
+from .scripts.imdbMovies import updateIMDbData, updateAllMoviesIMDb, getIMDbData, importReviews, updateRatings, updateMovieTMDb, updateOMDbRatings, updateRT
 
 from imdb import IMDb
 
@@ -135,14 +135,17 @@ def getFilterReviews(sec='',r='',rGET = {}):
         elif rGET['esp'] == 'other' and sec == 'desr':
             reviews = Review.objects.raw("select * from reviews_movie, reviews_review where reviews_review.movie_id = reviews_movie.imdbID group by reviews_movie.imdbID")
         elif rGET['esp'] == 'updateerrors' and sec == 'desr':
-            reviews = reviews.filter(Q(movie__ratingRT=''))
-            reviews = reviews.filter(Q(movie__ratingMetascore=0))
+            #reviews = reviews.filter(Q(movie__ratingRT=''))
+            #reviews = reviews.filter(Q(movie__ratingMetascore=0))
 
-            #reviews = reviews.filter(Q(movie__kind='movie')).order_by('movie__updated')
-            #for r in reviews:
-                #updateOMDbRatings(r.movie)
-                #r.movie.updated = timezone.now().date()
-                #r.movie.save()
+            reviews = reviews.filter(Q(movie__kind='movie')).order_by(['movie__updated','-movie__year'])
+            for i,r in enumerate(reviews):
+                updateOMDbRatings(r.movie)
+                updateRT(r.movie)
+                r.movie.updated = timezone.now().date()
+                r.movie.save()
+                if i > 100:
+                    break
 
         elif rGET['esp'] == 'editedmovies' and sec == 'desr':
             reviews = reviews.filter(Q(sv=1) | Q(sf=1))

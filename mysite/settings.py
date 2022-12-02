@@ -82,7 +82,6 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
-
 if DEBUG:
     DATABASES = {
         'default': {
@@ -101,7 +100,6 @@ else:
             'PORT': os.environ["PGPORT"],
         }
     }
-
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
