@@ -99,6 +99,10 @@ def getFilterReviews(sec='',r='',rGET = {}):
             order = ['-movie__ratingIMDb','-movie__year','movie__title']
         elif rGET['ord'] == 'year-rating':
             order = ['-movie__year','-movie__ratingIMDb','movie__title']
+        elif rGET['ord'] == 'ratingRT':
+            order = ['-movie__ratingRT','-movie__year','movie__title']
+        elif rGET['ord'] == 'year-ratingRT':
+            order = ['-movie__year','-movie__ratingRT','movie__title']
 
     ## Filter r and sec
     reviews = Review.objects.filter(Q(author__username='desr'+r))

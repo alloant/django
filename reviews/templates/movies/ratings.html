@@ -8,8 +8,8 @@
     <a href='https://www.themoviedb.org/{{ r.movie.tmdb_BASE_PATH }}/{{ r.movie.tmdbID}}' class='card-link' target='blank_'><img src='/static/images/tmdb.png' style='width:30px'><span class='font-weight-bold' style='color:black; font-size: 100%;'>: {{ r.movie.ratingTMDb }}</span></a>
 {% endif %}
 
-{% if r.movie.ratingRT != '' %}
-    <img src='/static/images/rt.png' style='width:30px'><span class='font-weight-bold' style='color:black; font-size: 100%'>: {{ r.movie.ratingRT }}</span>
+{% if r.movie.ratingRT >= 0 %}
+    <img src='/static/images/rt.png' style='width:30px'><span class='font-weight-bold' style='color:black; font-size: 100%'>: {{ r.movie.ratingRT }}%</span>
 {% endif %}
 
 {% if r.movie.ratingMetascore > 0 %}

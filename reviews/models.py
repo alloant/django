@@ -17,7 +17,8 @@ class Movie(models.Model):
     
     ratingIMDb = models.DecimalField(max_digits=3,decimal_places=1,blank=True,default=0)
     ratingTMDb = models.DecimalField(max_digits=3,decimal_places=1,blank=True,default=0)
-    ratingRT = models.CharField(max_length=10,blank=True,default="")
+    ratingRT = models.DecimalField(max_digits=3,decimal_places=0,blank=True,default=0)
+    #ratingRT = models.CharField(max_length=10,blank=True,default="")
     ratingMetascore = models.DecimalField(max_digits=3,decimal_places=0,blank=True,default=0)
     
     certification = models.CharField(max_length=200,default='',blank=True)
