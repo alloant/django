@@ -138,7 +138,7 @@ def getFilterReviews(sec='',r='',rGET = {}):
             #reviews = reviews.filter(Q(movie__ratingRT=''))
             #reviews = reviews.filter(Q(movie__ratingMetascore=0))
 
-            reviews = reviews.filter(Q(movie__kind='movie')).order_by(['movie__updated','-movie__year'])
+            reviews = reviews.filter(Q(movie__kind='movie')).order_by('movie__updated','-movie__year')
             for i,r in enumerate(reviews):
                 updateOMDbRatings(r.movie)
                 updateRT(r.movie)
@@ -185,7 +185,7 @@ def getFilterReviews(sec='',r='',rGET = {}):
     ## Filter for q
     if 'q' in rGET:
         reviews = reviews.filter(Q(movie__title__iregex=r'%s' % (rGET['q'])))
-    print(order)
+    
     return reviews.order_by(order[0],order[1],order[2])
 
 
