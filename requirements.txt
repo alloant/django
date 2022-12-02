@@ -17,3 +17,4 @@ django-crispy-forms==1.14.0
 dj-database-url==1.0.0
 django-pwa==1.0.10
 whitenoise[brotli]==6.2.0
+beautifulsoup4==4.11.1
