@@ -19,7 +19,7 @@
 
     {% endif %}
     
-    {% if r.movie.ratingRT >= -1 %}
+    {% if r.movie.ratingRT >= 0 %}
         <a href='{{ r.movie.tomatoURL }}' target='blank_'>
             <img src='/static/images/rt.png' style='width:30px'>
             <span class='font-weight-bold' style='color:black; font-size: 100%'>
@@ -28,7 +28,7 @@
         </a>
     {% endif %}
 
-    {% if r.movie.audienceRT >= -1 %}
+    {% if r.movie.audienceRT >= 0 %}
         <a href='{{ r.movie.tomatoURL }}' class='card-link' target='blank_'>
             <img src='/static/images/popcorn.png' style='width:30px'>
                 <span class='font-weight-bold' style='color:black; font-size: 100%'>
