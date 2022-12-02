@@ -7,7 +7,7 @@
     {% if request.user_agent.is_mobile %}
 	
 	<div class="nav-item dropdown text-center">
-    <div class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:white">Order</a>
+    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color:white">Order</a>
 	    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="/?{% param_replace ord='year' page=0 %}">Year</a>
 			<a class="dropdown-item" href="/?{% param_replace ord='title' page=0 %}">Title</a>
@@ -15,7 +15,7 @@
 			<a class="dropdown-item" href="/?{% param_replace ord='rating' page=0 %}">Rating</a>
 		</div>
     </div>
-    </div>
+    
     
     <div class="nav-item text-center">
         <button type="button" class="btn btn-primary btn-xs mx-1" data-toggle="modal" data-target="#queryModal"><i class="fa fa-search"></i></button>
