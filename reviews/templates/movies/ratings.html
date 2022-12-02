@@ -2,8 +2,8 @@
 <div class="p-0">
     {% if r.movie.ratingIMDb > 0 %}
         <a class='title' href='https://www.imdb.com/title/{{ r.movie.imdbID }}' target='_blank'>
-            <img src='/static/images/imdb.png' style='width:50px'>
-                <span class='font-weight-bold' style='color:black; font-size: 100%'>
+            <img src='/static/images/imdb.png' style='width:40px'>
+                <span class='font-weight-bold' style='color:black; font-size: 90%'>
                     : {{ r.movie.ratingIMDb }}
                 </span>
         </a>
@@ -11,8 +11,8 @@
 
     {% if r.movie.ratingTMDb > 0 %}
         <a href='https://www.themoviedb.org/{{ r.movie.tmdb_BASE_PATH }}/{{ r.movie.tmdbID}}' class='card-link' target='blank_'>
-            <img src='/static/images/tmdb.png' style='width:30px'>
-            <span class='font-weight-bold' style='color:black; font-size: 100%'>
+            <img src='/static/images/tmdb.png' style='width:25px'>
+            <span class='font-weight-bold' style='color:black; font-size: 90%'>
                 : {{ r.movie.ratingTMDb }}
             </span>
         </a>
@@ -21,8 +21,8 @@
     
     {% if r.movie.ratingRT >= 0 %}
         <a href='{{ r.movie.tomatoURL }}' target='blank_'>
-            <img src='/static/images/rt.png' style='width:30px'>
-            <span class='font-weight-bold' style='color:black; font-size: 100%'>
+            <img src='/static/images/rt.png' style='width:25px'>
+            <span class='font-weight-bold' style='color:black; font-size: 90%'>
                 : {{ r.movie.ratingRT }}%
             </span>
         </a>
@@ -30,16 +30,16 @@
 
     {% if r.movie.audienceRT >= 0 %}
         <a href='{{ r.movie.tomatoURL }}' class='card-link' target='blank_'>
-            <img src='/static/images/popcorn.png' style='width:30px'>
-                <span class='font-weight-bold' style='color:black; font-size: 100%'>
+            <img src='/static/images/popcorn.png' style='width:25px'>
+                <span class='font-weight-bold' style='color:black; font-size: 90%'>
                     : {{ r.movie.audienceRT }}%
                 </span>
         </a>
     {% endif %}
 
     {% if r.movie.ratingMetascore > 0 %}
-        <img src='/static/images/metacritic.png' style='width:30px'>
-            <span class='font-weight-bold' style='color:black; font-size: 100%'>
+        <img src='/static/images/metacritic.png' style='width:25px'>
+            <span class='font-weight-bold' style='color:black; font-size: 90%'>
                 : {{ r.movie.ratingMetascore }}
             </span>
     {% endif %} 
