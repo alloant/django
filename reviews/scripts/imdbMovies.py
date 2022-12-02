@@ -4,6 +4,9 @@ from datetime import datetime
 from django.db.models import Q
 from django.utils import timezone
 
+import requests as rq
+from bs4 import BeautifulSoup as bs
+
 import csv
 
 import tmdbsimple as tmdb
@@ -147,13 +150,18 @@ def updateMovieTMDb(movie):
             getIMDbData(movie,missing)
 
         updateOMDbRatings(movie)
+        updateRT(movie)
     
         movie.updated = timezone.now().date()
         movie.save()
 
 def updateOMDbRatings(movie):
-    print(movie.title,movie.updated)
-    m = oa.get(imdbid=movie.imdbID) 
+    print(movie.title,movie.updated,movie.kind)
+    if movie.kind == 'tv':
+        m = oa.get(imdbid=movie.imdbID,tomatoes=True,media_type='series')
+    else:
+        m = oa.get(imdbid=movie.imdbID,tomatoes=True)
+
     if 'ratings' in m:
         for r in m['ratings']:
             if r['source'] == 'Rotten Tomatoes':
@@ -171,7 +179,25 @@ def updateOMDbRatings(movie):
         if 'imdb_rating' in m:
             if m['imdb_rating'] != 'N/A':
                 movie.ratingIMDb = m['imdb_rating']
+    
+    if 'tomato_url' in m:
+        movie.tomatoURL = m['tomato_url']
 
+
+def updateRT(movie):
+    if movie.tomatoURL != "":
+        try:
+            res = rq.get(movie.tomatoURL)
+            soup = bs(res.text, "html.parser")
+            rows = soup.select('score-board')
+    
+            for x in rows:
+                info={"audiencescore":x.get('audiencescore'),"tomatometerscore":x.get('tomatometerscore')}
+            
+            movie.ratingRT = info['tomatometerscore']
+            movie.audienceRT = info['audiencescore']
+        except Exception as e:
+            print(e)
 
 def updateRatings(movie):
     print("Updating ratings...")
