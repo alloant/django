@@ -158,7 +158,7 @@ def updateOMDbRatings(movie):
         for r in m['ratings']:
             if r['source'] == 'Rotten Tomatoes':
                 if r['value'] != 'N/A':
-                    movie.ratingRT = r['value']
+                    movie.ratingRT = int(r['value'].replace('%',''))
                 else:
                     movie.ratingRT = ''
         
