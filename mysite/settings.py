@@ -118,6 +118,37 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+################# PWA #########################
+PWA_APP_NAME = 'Nice movies'
+PWA_APP_DESCRIPTION = "A list with some nice movies"
+PWA_APP_THEME_COLOR = '#5000c8'
+PWA_APP_BACKGROUND_COLOR = '#5000c8'
+PWA_APP_DISPLAY = 'standalone'
+PWA_APP_SCOPE = '/'
+PWA_APP_ORIENTATION = 'portrait'
+PWA_APP_START_URL = '/'
+PWA_APP_STATUS_BAR_COLOR = 'default'
+PWA_APP_ICONS = [
+    {
+        'src': '/static/img/movie.png',
+        'sizes': '512x512'
+    }
+]
+PWA_APP_ICONS_APPLE = [
+    {
+        'src': '/static/img/movie.png',
+        'sizes': '512x512'
+    }
+]
+#PWA_APP_SPLASH_SCREEN = [
+#    {
+#        'src': '/static/images/icons/splash-640x1136.png',
+#        'media': '(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)'
+#    }
+#]
+PWA_APP_DIR = 'ltr'
+PWA_APP_LANG = 'en-US'
+##################################
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
@@ -135,6 +166,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+# For PWA
+#STATICFILES_DIRS = [
+#    os.path.join(BASE_DIR, 'static'),
+#]
 
 #if not DEBUG:
 # Tell Django to copy statics to the `staticfiles` directory

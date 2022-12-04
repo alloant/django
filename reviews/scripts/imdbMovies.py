@@ -30,7 +30,7 @@ def nonullint(value):
 
 def updateMovieTMDb(movie):
     if not movie.manual:
-        print('\033[1m{:10s}\033[0m'.format("\nGetting movie: {} ({}) {}".format(movie.title,movie.imdbID,movie.updated)))
+        print('\033[1m{:10s}\033[0m'.format("\nGetting movie: {} ({}) {}".format(movie.title,movie.year,movie.updated)))
         missing = []
         if movie.tmdbID > 0:
             if movie.tmdb_BASE_PATH == 'movie':
@@ -156,7 +156,7 @@ def updateMovieTMDb(movie):
         movie.save()
 
 def updateOMDbRatings(movie):
-    print(movie.title,movie.updated,movie.kind)
+    print(movie.title,movie.year,movie.updated)
     if movie.kind == 'tv':
         m = oa.get(imdbid=movie.imdbID,tomatoes=True,media_type='series')
     else:

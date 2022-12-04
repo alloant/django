@@ -139,13 +139,18 @@ def getFilterReviews(sec='',r='',rGET = {}):
             #reviews = reviews.filter(Q(movie__ratingMetascore=0))
 
             reviews = reviews.filter(Q(movie__kind='movie')).order_by('movie__updated','-movie__year')
+            #reviews = reviews.filter(Q(movie__kind='movie'),Q(movie__year=2021)).order_by('movie__updated','-movie__year')
+            import time
             for i,r in enumerate(reviews):
                 updateOMDbRatings(r.movie)
                 updateRT(r.movie)
                 r.movie.updated = timezone.now().date()
                 r.movie.save()
-                if i > 100:
-                    break
+                print(i)
+                time.sleep(15)
+
+                #if i > 50:
+                #    break
 
         elif rGET['esp'] == 'editedmovies' and sec == 'desr':
             reviews = reviews.filter(Q(sv=1) | Q(sf=1))
@@ -299,22 +304,32 @@ def addNewMovie(request):
     movies = []
 
     if q != None:
-        ms = tmdb.Search()
-        r1 = ms.movie(query=q)
-        for r in ms.results: r['BASE_PATH'] = 'movie'
-        ss = tmdb.Search()
-        r2 = ss.tv(query=q)
-        for r in ss.results: r['BASE_PATH'] = 'tv'
+        if q[:6] == 'movie=':
+            m = tmdb.Movies(q[6:])
+            response = m.info()
+            
+            movies.append(movieClass(tmdbID=m.id,title=m.title,poster_path=m.poster_path,backdrop_path=m.backdrop_path,year=m.release_date[:4],kind='movie',overview=m.overview,BASE_PATH=m.BASE_PATH))
+        elif q[:3] == 'tv=':
+            m = tmdb.TV(q[3:])
+            response = m.info()
+            
+            movies.append(movieClass(tmdbID=m.id,title=m.name,poster_path=m.poster_path,backdrop_path=m.backdrop_path,year=m.first_air_date[:4],kind='tv',overview=m.overview,BASE_PATH=m.BASE_PATH))
+        else:
+            ms = tmdb.Search()
+            r1 = ms.movie(query=q)
+            for r in ms.results: r['BASE_PATH'] = 'movie'
+            ss = tmdb.Search()
+            r2 = ss.tv(query=q)
+            for r in ss.results: r['BASE_PATH'] = 'tv'
 
-        results = ms.results + ss.results
-
-
-        mvs = sorted(results, key=lambda k: k['popularity'], reverse=True)
-        for m in mvs:
-            if m['BASE_PATH'] == 'movie':
-                movies.append(movieClass(tmdbID=getValueDict(m,'id'),title=getValueDict(m,'title'),poster_path=getValueDict(m,'poster_path'),backdrop_path=getValueDict(m,'backdrop_path'),year=getValueDict(m,'release_date')[:4],kind='movie',overview=getValueDict(m,'overview'),BASE_PATH=m['BASE_PATH']))
-            else:
-                movies.append(movieClass(tmdbID=getValueDict(m,'id'),title=getValueDict(m,'name'),poster_path=getValueDict(m,'poster_path'),backdrop_path=getValueDict(m,'backdrop_path'),year=getValueDict(m,'first_air_date')[:4],kind='movie',overview=getValueDict(m,'overview'),BASE_PATH=m['BASE_PATH']))
+            results = ms.results + ss.results
+            mvs = sorted(results, key=lambda k: k['popularity'], reverse=True)
+        
+            for m in mvs:
+                if m['BASE_PATH'] == 'movie':
+                    movies.append(movieClass(tmdbID=getValueDict(m,'id'),title=getValueDict(m,'title'),poster_path=getValueDict(m,'poster_path'),backdrop_path=getValueDict(m,'backdrop_path'),year=getValueDict(m,'release_date')[:4],kind='movie',overview=getValueDict(m,'overview'),BASE_PATH=m['BASE_PATH']))
+                else:
+                    movies.append(movieClass(tmdbID=getValueDict(m,'id'),title=getValueDict(m,'name'),poster_path=getValueDict(m,'poster_path'),backdrop_path=getValueDict(m,'backdrop_path'),year=getValueDict(m,'first_air_date')[:4],kind='tv',overview=getValueDict(m,'overview'),BASE_PATH=m['BASE_PATH']))
  
     if request.user_agent.is_mobile:
         tmpl = 'movies/searchMovieMobile.html'
